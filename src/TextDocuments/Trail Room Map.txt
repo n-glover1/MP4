@@ -1,38 +1,23 @@
-{N, E, S, W}
+//{N, E, S, W}
 
-Room 0 Gatehouse
-{-1, 1, 1, -1}
-Room 1 Parking Lot
-{0, 3, 2, -1}
-Room 2 Inn
-{1, -1, -1, -1}
-Room 3 Trail 3 Beginning
-{4, -1, 5, 1}
-Room 4 Trail 3 Northern Enterance to Trail 3
-{6, -1, 3, 7}
-Room 5 Trail 3 Southern Enterance to Trail 3
-{3, 8, 12, -1}
-Room 6 Trail 3 North
-{8, 9, 4, 10}
-Room 7 Trail 2 off Trail 3
-{15,4,16,-1}
-Room 8 Continues on Trail 3
-{6, 11, 5, -1}
-Room 9 Trail 9 Enterance
-{-1,13,-1,6}
-Room 10 Trail 7 Enterance
-{-1,6,-1,17}
-Room 11 Northern Enterance to Trail 6
-{-1,14,-1,8}
-Room 12 Southern Enterance to Trail 6
-{5, 14, -1, -1}
-Room 13 Somewhere on Trail 9
-{9, -1, 9, -1}
-Room 14 Somewhere on Trail 6
-{-1, 11, 12, -1}
-Room 15 Spring Shelter on Trail 2
-{-1,-1,7,-1}
-Room 16 Southern End of Trail 2
-{7,-1,-1,-1}
-Room 17 Somewhere on Trail 7
-{-1 10, -1, -1}
+
+0 Gatehouse--{-1, 1, 1, -1}
+1 Parking Lot--{0, 3, 2, -1}
+2 Inn--{1, -1, -1, -1}
+3 Trail 3 Beginning--{4, -1, 5, 1}
+4 Trail 3 Northern Entrance to Trail 3--{6, -1, 3, 7}
+5 Trail 3 Southern Entrance to Trail 3--{3, 8, 12, -1}
+6 Trail 3 North--{8, 9, 4, 10}
+7 Trail 2 off Trail 3--{15, 4, 16, -1}
+8 Continues on Trail 3--{6, 11, 5, -1}
+9 Trail 9 Entrance--{-1, 13, -1, 6}
+10 Trail 7 Entrance--{-1, 6, -1, 17}
+11 Northern Entrance to Trail 6--{-1, 14, -1, 8}
+12 Southern Entrance to Trail 6--{5, 14, -1, -1}
+13 Somewhere on Trail 9--{9, -1, 9, -1}
+14 Somewhere on Trail 6--{-1, 11, 12, -1}
+15 Spring Shelter on Trail 2--{-1, -1, 7, -1}
+16 Southern End of Trail 2--{7, -1, -1, -1}
+17 Somewhere on Trail 7--{-1, 10, -1, -1}
+18 Somewhere on Trail 3--{6, -1, 8, -1}
+19 Boat Rental--{2, -1, -1, -1}

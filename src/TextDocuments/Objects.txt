@@ -1,11 +1,11 @@
 NAME -- ROOM -- POINT VALUE
 
 
-Pine Cone -- 18 -- 5
-Parking Receipt -- 0 -- 5
-Cattail -- 14 -- 10
-Boat -- 19 -- 15
-Canteen -- 15 -- 10
-Bluebird -- 10 -- 15 //Random Number Generates. If number is odd multiple of 10, bird spawns
-Rusted Key -- 13 -- 10
-Map -- 2 -- 5
+Pine Cone--18--5
+Parking Receipt--0--5
+Cattail--14--10
+Boat--19--15
+Canteen--15--10
+Bluebird--10--15 //Random Number Generates. 5% chance of spawning
+Rusted Key--13--10
+Map--2--5
