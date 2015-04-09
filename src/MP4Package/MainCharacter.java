@@ -17,6 +17,7 @@ public class MainCharacter {
     int CarryWeight = 0;
     int MaxCarryWeight;
     int Score;
+    boolean Helping = false;
     ArrayList<Object> Inventory = new ArrayList<Object>();
     
     
@@ -32,6 +33,9 @@ public class MainCharacter {
     public void removeObject(Object object) {
         Inventory.remove(object);
         CarryWeight -= object.getWeight();
+    }
+    public boolean isHelping() {
+        return Helping;
     }
     
 }
