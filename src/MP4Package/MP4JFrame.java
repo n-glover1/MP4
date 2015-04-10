@@ -4,30 +4,38 @@
  * and open the template in the editor.
  */
 package MP4Package;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Noah
  */
 public class MP4JFrame extends javax.swing.JFrame {
 
+    Room[] rooms = new Room[21];
+    Object[] objects = new Object[8];
+    MainCharacter you;
+
     /**
      * Creates new form MP4JFrame
      */
     public MP4JFrame() throws IOException {
         initComponents();
-        Room[] rooms = new Room[21];
+        PrintWriter writer = new PrintWriter("src\\TextDocuments\\outputText.txt", "UTF-8");
+        writer.close();
         createRooms(rooms);
-        String s = "";
-        for(int i = 0;i < 21; i++) {
-            s = "" + rooms[i].getRoomNum();
-            System.out.println(s);
-        }
-        
-        
+        you = new MainCharacter(rooms[0]);
+        createRoomDescriptions(rooms);
+        createObjects(objects);
+        setupRoomImages(rooms[0]);
+        placeObjectsInRoom(objects, rooms);
+        updateInfoPanel(rooms[0].getDescription());
     }
 
     /**
@@ -39,46 +47,32 @@ public class MP4JFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        RoomImage = new javax.swing.JPanel();
-        Map = new javax.swing.JPanel();
         CommandLine = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        OldTextInfo = new javax.swing.JTextPane();
+        Map = new javax.swing.JLabel();
+        RoomImage = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        OldTextInfo = new javax.swing.JTextArea();
+        submitCommand = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        RoomImage.setBackground(new java.awt.Color(204, 0, 0));
-
-        javax.swing.GroupLayout RoomImageLayout = new javax.swing.GroupLayout(RoomImage);
-        RoomImage.setLayout(RoomImageLayout);
-        RoomImageLayout.setHorizontalGroup(
-            RoomImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        RoomImageLayout.setVerticalGroup(
-            RoomImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
-        );
-
-        Map.setBackground(new java.awt.Color(0, 255, 51));
-
-        javax.swing.GroupLayout MapLayout = new javax.swing.GroupLayout(Map);
-        Map.setLayout(MapLayout);
-        MapLayout.setHorizontalGroup(
-            MapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-        MapLayout.setVerticalGroup(
-            MapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
-        );
 
         CommandLine.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         CommandLine.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         CommandLine.setText("Enter Commands Here");
 
         OldTextInfo.setEditable(false);
-        jScrollPane2.setViewportView(OldTextInfo);
+        OldTextInfo.setColumns(20);
+        OldTextInfo.setLineWrap(true);
+        OldTextInfo.setRows(5);
+        OldTextInfo.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(OldTextInfo);
+
+        submitCommand.setText("Submit");
+        submitCommand.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitCommandActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,14 +80,17 @@ public class MP4JFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(CommandLine, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Map, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(RoomImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(CommandLine, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(submitCommand))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(RoomImage, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Map, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(707, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,18 +98,186 @@ public class MP4JFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(CommandLine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2))
+                        .addComponent(Map, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(RoomImage, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Map, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(RoomImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CommandLine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(submitCommand))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1)))
+                .addGap(85, 85, 85))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void submitCommandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitCommandActionPerformed
+        String command;
+        int score = 0;
+        Room currentRoom;
+        int[] surroundings = new int[4];
+        command = CommandLine.getText();
+        command = command.toUpperCase();
+
+        if (command == "EXIT") {
+            System.exit(0);
+        }
+        currentRoom = you.getRoom();
+        surroundings = currentRoom.getSurrounding();
+        //Movement Commands
+        if (command.contains("NORTH")) {
+            if (surroundings[0] < 0) {
+                try {
+                    updateInfoPanel("Invalid Move Location");
+                } catch (IOException ex) {
+                    Logger.getLogger(MP4JFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                you.setLocation(rooms[surroundings[0]]);
+                setupRoomImages(currentRoom);
+                try {
+                    updateInfoPanel(you.getRoom().getDescription());
+                } catch (IOException ex) {
+                    Logger.getLogger(MP4JFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+        }
+        if (command.contains("EAST")) {
+            if (surroundings[1] < 0) {
+                try {
+                    updateInfoPanel("Invalid Move Location");
+                } catch (IOException ex) {
+                    Logger.getLogger(MP4JFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                you.setLocation(rooms[surroundings[1]]);
+                setupRoomImages(currentRoom);
+                try {
+                    updateInfoPanel(you.getRoom().getDescription());
+                } catch (IOException ex) {
+                    Logger.getLogger(MP4JFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+        }
+        if (command.contains("SOUTH")) {
+            if (surroundings[2] < 0) {
+                try {
+                    updateInfoPanel("Invalid Move Location");
+                } catch (IOException ex) {
+                    Logger.getLogger(MP4JFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                you.setLocation(rooms[surroundings[2]]);
+                setupRoomImages(currentRoom);
+                try {
+                    updateInfoPanel(you.getRoom().getDescription());
+                } catch (IOException ex) {
+                    Logger.getLogger(MP4JFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+        }
+        if (command.contains("WEST")) {
+            if (surroundings[3] < 0) {
+                try {
+                    updateInfoPanel("Invalid Move Location");
+                } catch (IOException ex) {
+                    Logger.getLogger(MP4JFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                you.setLocation(rooms[surroundings[3]]);
+                setupRoomImages(currentRoom);
+                try {
+                    updateInfoPanel(you.getRoom().getDescription());
+                } catch (IOException ex) {
+                    Logger.getLogger(MP4JFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+        }
+        //Item Spawns
+        if (command.contains("TAKE")) {
+            if (currentRoom.getRoomObject() == null) {
+                try {
+                    updateInfoPanel(currentRoom.getRoomNum() + " does not have an item in it");
+                } catch (IOException ex) {
+                    Logger.getLogger(MP4JFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (currentRoom.getRoomNum() == 19) {
+                if (!you.isBeingHelped()) {
+                    try {
+                        updateInfoPanel("You cannot pick up that object by yourself. You need to YELL to get someone's help");
+                    } catch (IOException ex) {
+                        Logger.getLogger(MP4JFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    String objectName = currentRoom.getRoomObject().getName();
+                    you.addObject(currentRoom.getRoomObject());
+                    currentRoom.takeObject();
+                    try {
+                        updateInfoPanel(objectName + " added to your inventory");
+                    } catch (IOException ex) {
+                        Logger.getLogger(MP4JFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } else {
+                String objectName = currentRoom.getRoomObject().getName();
+                you.addObject(currentRoom.getRoomObject());
+                currentRoom.takeObject();
+                try {
+                    updateInfoPanel(objectName + " added to your inventory");
+                } catch (IOException ex) {
+                    Logger.getLogger(MP4JFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        if (command.contains("DROP")) {
+            if (currentRoom.getRoomNum() != 2) {
+                try {
+                    updateInfoPanel("We are not at the Inn. We do no want to liter and leave these objects on the trails.");
+                } catch (IOException ex) {
+                    Logger.getLogger(MP4JFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                int temp = 0;
+                score = you.removeAllObjects();
+                you.updateScore(score * 5);
+                try {
+                    updateInfoPanel("Items dropped off at the Inn. You added " + (score*5) + " to your total score." );
+                } catch (IOException ex) {
+                    Logger.getLogger(MP4JFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                for (int i = 0; i < rooms.length; i++) {
+                    temp = i;
+                    if (rooms[i].getRoomObject() != null) {
+                        break;
+                    }
+                    if (temp == 20) {
+                        JOptionPane.showMessageDialog(this, "Game over. Youre final Score was: " + you.getScore() + ". Thank you for playing. I hope you enjoyed your tour of Pokagon Park.");
+                        System.exit(0);
+                    }
+                }
+
+            }
+        }
+        if (command.contains("YELL")) {
+            try {
+                updateInfoPanel(you.Yell());
+            } catch (IOException ex) {
+                Logger.getLogger(MP4JFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            you.isBeingHelped();
+        }
+        setupRoomImages(currentRoom);
+    }//GEN-LAST:event_submitCommandActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,73 +316,213 @@ public class MP4JFrame extends javax.swing.JFrame {
                 }
             }
         });
+
     }
-    
+
     public void createRooms(Room[] rooms) throws FileNotFoundException, IOException {
         int temp = 0;
         String input;
         int roomNum = 0;
         String roomName = "";
-        int[] directions = {-2,-2,-2,-2};
-        FileReader fr = new FileReader("C:\\Users\\Noah\\Dropbox\\Java-Glover-Noah\\NetBeansProjects\\MP4\\src\\TextDocuments\\TrailRoomMap.txt");
+        int north = -2;
+        int south = -2;
+        int east = -2;
+        int west = -2;
+        int[] surroundings = new int[4];
+        FileReader fr = new FileReader("src\\TextDocuments\\TrailRoomMap.txt");
         BufferedReader br = new BufferedReader(fr);
-        while((input = br.readLine()) != null) {
-            directions[0] = -2;
-            directions[1] = -2;
-            directions[2] = -2;
-            directions[3] = -2;
-            System.out.println(input);
-            for(int i = 0; i < input.length(); i++) {
-                if(input.charAt(i) == '-' && input.charAt(i+1) == '-') {
+        while ((input = br.readLine()) != null) {
+
+            for (int i = 0; i < input.length(); i++) {
+                if (input.charAt(i) == '-' && input.charAt(i + 1) == '-') {
                     roomNum = Integer.parseInt(input.substring(0, i));
-                    input = input.substring(i+2);
+                    input = input.substring(i + 2);
                     break;
                 }
             }
-            for(int i = 0; i < input.length(); i++) {
-                if(input.charAt(i) == '-' && input.charAt(i+1) == '-') {
-                    roomName = input.substring(0,i);
-                    input = input.substring(i+3);
+            for (int i = 0; i < input.length(); i++) {
+                if (input.charAt(i) == '-' && input.charAt(i + 1) == '-') {
+                    roomName = input.substring(0, i);
+                    input = input.substring(i + 3);
                     break;
                 }
             }
-            for(int i = 0; i < input.length(); i++) {
-                if(input.charAt(i) == ',') {
-                    if(directions[0] == -2) {
-                        directions[0] = Integer.parseInt(input.substring(0,i));
-                        input = input.substring(i+1);
-                        i=-1;
-                        continue;
-                    }
-                    if(directions[1] == -2) {
-                        directions[1] = Integer.parseInt(input.substring(0,i));
-                        input = input.substring(i+1);
-                        i=-1;
-                        continue;
-                    }
-                    if(directions[2] == -2) {
-                        directions[2] = Integer.parseInt(input.substring(0,i));
-                        input = input.substring(i+2);
-                        i=-1;
-                        continue;
-                    }
-                    if(directions[3] == -2) {
-                        directions[3] = Integer.parseInt(input.substring(0,i));
-                        break;
-                    }
+            for (int i = 0; i < input.length(); i++) {
+                if (input.charAt(i) == ',') {
+                    north = Integer.parseInt(input.substring(0, i));
+                    input = input.substring(i + 1);
+                    break;
                 }
             }
-                    
+            for (int i = 0; i < input.length(); i++) {
+                if (input.charAt(i) == ',') {
+                    east = Integer.parseInt(input.substring(0, i));
+                    input = input.substring(i + 1);
+                    break;
+                }
+            }
+            for (int i = 0; i < input.length(); i++) {
+                if (input.charAt(i) == ',') {
+                    south = Integer.parseInt(input.substring(0, i));
+                    input = input.substring(i + 1);
+                    break;
+                }
+            }
+            for (int i = 0; i < input.length(); i++) {
+                if (input.charAt(i) == '}') {
+                    west = Integer.parseInt(input.substring(0, i));
+                    break;
+                }
+            }
+            rooms[temp] = new Room(roomNum, roomName, north, east, south, west);
+            temp++;
         }
-        rooms[temp] = new Room(roomNum, roomName, directions);
         fr.close();
+        br.close();
+    }
+
+    public void createRoomDescriptions(Room[] rooms) throws FileNotFoundException, IOException {
+        FileReader fr = new FileReader("src\\TextDocuments\\RoomDescriptions.txt");
+        BufferedReader br = new BufferedReader(fr);
+        String input = "";
+        rooms[0].setDescription("");
+        int i = 0;
+        while ((input = br.readLine()) != null || i < 21) {
+            rooms[i].setDescription(input);
+            i++;
+        }
+        fr.close();
+    }
+
+    public void setupRoomImages(Room currentRoom) {
+        int roomNumber = currentRoom.getRoomNum();
+        ImageIcon icon;
+        if (roomNumber == 4 || roomNumber == 3 || roomNumber == 6 || roomNumber == 8 || roomNumber == 18) {
+            icon = new ImageIcon("src\\Images\\Trail3.jpg");
+            RoomImage.setIcon(icon);
+        }
+        if (roomNumber == 12 || roomNumber == 14 || roomNumber == 11) {
+            icon = new ImageIcon("src\\Images\\Trail6.jpg");
+            RoomImage.setIcon(icon);
+        }
+        if (roomNumber == 7 || roomNumber == 16) {
+            icon = new ImageIcon("src\\Images\\Trail2.jpg");
+            RoomImage.setIcon(icon);
+        }
+        if (roomNumber == 15) {
+            icon = new ImageIcon("src\\Images\\SpringShelter.jpg");
+            RoomImage.setIcon(icon);
+        }
+        if (roomNumber == 10 || roomNumber == 17) {
+            icon = new ImageIcon("src\\Images\\Trail7.jpg");
+            RoomImage.setIcon(icon);
+        }
+        if (roomNumber == 9 || roomNumber == 13) {
+            icon = new ImageIcon("src\\Images\\Trail9.jpg");
+            RoomImage.setIcon(icon);
+        }
+        if (roomNumber == 2) {
+            icon = new ImageIcon("src\\Images\\Inn.jpg");
+            RoomImage.setIcon(icon);
+        }
+        if (roomNumber == 19) {
+            icon = new ImageIcon("src\\Images\\BoatRental.jpg");
+            RoomImage.setIcon(icon);
+        }
+        if (roomNumber == 5) {
+            icon = new ImageIcon("src\\Images\\LakeLonidaw.jpg");
+            RoomImage.setIcon(icon);
+        }
+        if (roomNumber == 0) {
+            icon = new ImageIcon("src\\Images\\Enterance.jpg");
+            RoomImage.setIcon(icon);
+        }
+        if (roomNumber == 1) {
+            icon = new ImageIcon("src\\Images\\ParkingLot.jpg");
+            RoomImage.setIcon(icon);
+        }
+    }
+
+    public void createObjects(Object[] objects) throws FileNotFoundException, IOException {
+        FileReader fr = new FileReader("src\\TextDocuments\\Objects.txt");
+        BufferedReader br = new BufferedReader(fr);
+        String input;
+        int temp = 0;
+        String objectName = "";
+        int roomNumber = -1;
+        int pointValue = 0;
+        //Name--Room--Point
+        while ((input = br.readLine()) != null) {
+            for (int i = 0; i < input.length(); i++) {
+                if (input.charAt(i) == '-' && input.charAt(i + 1) == '-') {
+                    objectName = input.substring(0, i);
+                    input = input.substring(i + 2);
+                    break;
+                }
+            }
+            for (int i = 0; i < input.length(); i++) {
+                if (input.charAt(i) == '-' && input.charAt(i + 1) == '-') {
+                    roomNumber = Integer.parseInt(input.substring(0, i));
+                    input = input.substring(i + 2);
+                    break;
+                }
+            }
+            for (int i = 0; i < input.length(); i++) {
+                pointValue = Integer.parseInt(input);
+                break;
+            }
+            objects[temp] = new Object(objectName, roomNumber, pointValue);
+            temp++;
+        }
+        fr.close();
+        br.close();
+    }
+
+    public void placeObjectsInRoom(Object[] objects, Room[] rooms) {
+        for (int i = 0; i < 8; i++) {
+            switch (i) {
+                case 0:
+                    rooms[18].spawnItem(objects[i]);
+                    break;
+                case 1:
+                    rooms[0].spawnItem(objects[i]);
+                    break;
+                case 2:
+                    rooms[14].spawnItem(objects[i]);
+                    break;
+                case 3:
+                    rooms[19].spawnItem(objects[i]);
+                    break;
+                case 4:
+                    rooms[15].spawnItem(objects[i]);
+                    break;
+                case 5:
+                    rooms[10].spawnItem(objects[i]);
+                    break;
+                case 6:
+                    rooms[13].spawnItem(objects[i]);
+                    break;
+                case 7:
+                    rooms[2].spawnItem(objects[i]);
+                    break;
+            }
+        }
+    }
+
+    public void updateInfoPanel(String updater) throws FileNotFoundException, IOException {
+        PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("src\\TextDocuments\\outputText.txt", true)));
+        writer.println(updater);
+        writer.close();
+        OldTextInfo.setText(updater);
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CommandLine;
-    private javax.swing.JPanel Map;
-    private javax.swing.JTextPane OldTextInfo;
-    private javax.swing.JPanel RoomImage;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel Map;
+    private javax.swing.JTextArea OldTextInfo;
+    private javax.swing.JLabel RoomImage;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton submitCommand;
     // End of variables declaration//GEN-END:variables
 }
