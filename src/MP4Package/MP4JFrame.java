@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package MP4Package;
-
+import java.io.*;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Noah
@@ -14,9 +17,17 @@ public class MP4JFrame extends javax.swing.JFrame {
     /**
      * Creates new form MP4JFrame
      */
-    public MP4JFrame() {
+    public MP4JFrame() throws IOException {
         initComponents();
-        oldTextInfo.setText("ABCD \n EFGH \n IJKL \n MNOP \n QRST \n UVWX \n YZ");
+        Room[] rooms = new Room[21];
+        createRooms(rooms);
+        String s = "";
+        for(int i = 0;i < 21; i++) {
+            s = "" + rooms[i].getRoomNum();
+            System.out.println(s);
+        }
+        
+        
     }
 
     /**
@@ -28,46 +39,46 @@ public class MP4JFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        RoomImage = new javax.swing.JPanel();
+        Map = new javax.swing.JPanel();
+        CommandLine = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        oldTextInfo = new javax.swing.JTextPane();
+        OldTextInfo = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 0, 0));
+        RoomImage.setBackground(new java.awt.Color(204, 0, 0));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 270, Short.MAX_VALUE)
+        javax.swing.GroupLayout RoomImageLayout = new javax.swing.GroupLayout(RoomImage);
+        RoomImage.setLayout(RoomImageLayout);
+        RoomImageLayout.setHorizontalGroup(
+            RoomImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
-        );
-
-        jPanel2.setBackground(new java.awt.Color(0, 255, 51));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 270, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+        RoomImageLayout.setVerticalGroup(
+            RoomImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 230, Short.MAX_VALUE)
         );
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField1.setText("Enter Commands Here");
+        Map.setBackground(new java.awt.Color(0, 255, 51));
 
-        oldTextInfo.setEditable(false);
-        jScrollPane2.setViewportView(oldTextInfo);
+        javax.swing.GroupLayout MapLayout = new javax.swing.GroupLayout(Map);
+        Map.setLayout(MapLayout);
+        MapLayout.setHorizontalGroup(
+            MapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+        MapLayout.setVerticalGroup(
+            MapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 230, Short.MAX_VALUE)
+        );
+
+        CommandLine.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        CommandLine.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        CommandLine.setText("Enter Commands Here");
+
+        OldTextInfo.setEditable(false);
+        jScrollPane2.setViewportView(OldTextInfo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,31 +88,27 @@ public class MP4JFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
-                .addGap(114, 114, 114)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(CommandLine, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Map, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(RoomImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CommandLine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2)))
-                .addContainerGap(83, Short.MAX_VALUE))
+                        .addComponent(Map, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(RoomImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -137,16 +144,80 @@ public class MP4JFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MP4JFrame().setVisible(true);
+                try {
+                    new MP4JFrame().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(MP4JFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
+    
+    public void createRooms(Room[] rooms) throws FileNotFoundException, IOException {
+        int temp = 0;
+        String input;
+        int roomNum = 0;
+        String roomName = "";
+        int[] directions = {-2,-2,-2,-2};
+        FileReader fr = new FileReader("C:\\Users\\Noah\\Dropbox\\Java-Glover-Noah\\NetBeansProjects\\MP4\\src\\TextDocuments\\TrailRoomMap.txt");
+        BufferedReader br = new BufferedReader(fr);
+        while((input = br.readLine()) != null) {
+            directions[0] = -2;
+            directions[1] = -2;
+            directions[2] = -2;
+            directions[3] = -2;
+            System.out.println(input);
+            for(int i = 0; i < input.length(); i++) {
+                if(input.charAt(i) == '-' && input.charAt(i+1) == '-') {
+                    roomNum = Integer.parseInt(input.substring(0, i));
+                    input = input.substring(i+2);
+                    break;
+                }
+            }
+            for(int i = 0; i < input.length(); i++) {
+                if(input.charAt(i) == '-' && input.charAt(i+1) == '-') {
+                    roomName = input.substring(0,i);
+                    input = input.substring(i+3);
+                    break;
+                }
+            }
+            for(int i = 0; i < input.length(); i++) {
+                if(input.charAt(i) == ',') {
+                    if(directions[0] == -2) {
+                        directions[0] = Integer.parseInt(input.substring(0,i));
+                        input = input.substring(i+1);
+                        i=-1;
+                        continue;
+                    }
+                    if(directions[1] == -2) {
+                        directions[1] = Integer.parseInt(input.substring(0,i));
+                        input = input.substring(i+1);
+                        i=-1;
+                        continue;
+                    }
+                    if(directions[2] == -2) {
+                        directions[2] = Integer.parseInt(input.substring(0,i));
+                        input = input.substring(i+2);
+                        i=-1;
+                        continue;
+                    }
+                    if(directions[3] == -2) {
+                        directions[3] = Integer.parseInt(input.substring(0,i));
+                        break;
+                    }
+                }
+            }
+                    
+        }
+        rooms[temp] = new Room(roomNum, roomName, directions);
+        fr.close();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField CommandLine;
+    private javax.swing.JPanel Map;
+    private javax.swing.JTextPane OldTextInfo;
+    private javax.swing.JPanel RoomImage;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextPane oldTextInfo;
     // End of variables declaration//GEN-END:variables
 }

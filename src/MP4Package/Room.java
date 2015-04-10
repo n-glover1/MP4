@@ -13,8 +13,15 @@ public class Room {
     
     
     int RoomNumber;
+    String RoomName;
     int RoomsSurrounding[] = new int[4];
     String Description;
+    
+    public Room(int roomNumber, String roomName, int[] surroundings) {
+        RoomNumber = roomNumber;
+        RoomName = roomName;
+        RoomsSurrounding = surroundings;
+    }
     
     
     public void setDescription(String description) {
@@ -23,7 +30,9 @@ public class Room {
     public String displayDescription() {
         return Description;
     }
-    
+    public int getRoomNum() {
+        return RoomNumber;
+    }
     
     
     
