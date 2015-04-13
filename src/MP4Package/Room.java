@@ -16,7 +16,7 @@ public class Room {
     String RoomName;
     int RoomsSurrounding[] = new int[4];
     String Description;
-    Object roomObject;
+    Object roomObject = null;
     
     public Room() {
         RoomNumber = -2;
@@ -26,10 +26,13 @@ public class Room {
         RoomsSurrounding[2] = -2;
         RoomsSurrounding[3] = -2;
     }
-    public Room(int roomNumber, String roomName, int[] surroundings) {
+    public Room(int roomNumber, String roomName, int north, int east, int south, int west) {
         RoomNumber = roomNumber;
         RoomName = roomName;
-        RoomsSurrounding = surroundings;
+        RoomsSurrounding[0] = north;
+        RoomsSurrounding[1] = east;
+        RoomsSurrounding[2] = south;
+        RoomsSurrounding[3] = west;
     }
     
     public void setDescription(String description) {
@@ -51,7 +54,15 @@ public class Room {
     public int[] getSurrounding() {
         return RoomsSurrounding;
     }
-    
+    public String getRoomName() {
+        return RoomName;
+    }
+    public Object getRoomObject() {
+        return roomObject;
+    }
+    public void takeObject() {
+        roomObject = null;
+    }
     
     
 }

@@ -33,9 +33,10 @@ public class MP4JFrame extends javax.swing.JFrame {
         you = new MainCharacter(rooms[0]);
         createRoomDescriptions(rooms);
         createObjects(objects);
-        setupRoomImages(rooms[0]);
+        setupRoomImages(rooms[0], you);
         placeObjectsInRoom(objects, rooms);
         updateInfoPanel(rooms[0].getDescription());
+        
     }
 
     /**
@@ -53,12 +54,18 @@ public class MP4JFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         OldTextInfo = new javax.swing.JTextArea();
         submitCommand = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        score = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         CommandLine.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         CommandLine.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         CommandLine.setText("Enter Commands Here");
+
+        Map.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Pokagon-map.jpg"))); // NOI18N
+
+        RoomImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EnteranceSign.jpg"))); // NOI18N
 
         OldTextInfo.setEditable(false);
         OldTextInfo.setColumns(20);
@@ -74,6 +81,12 @@ public class MP4JFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Score:");
+
+        score.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        score.setText("0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,27 +99,38 @@ public class MP4JFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(submitCommand))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(RoomImage, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Map, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(707, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Map, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(69, 69, 69)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(score)))
+                    .addComponent(RoomImage, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(613, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Map, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(RoomImage, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CommandLine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(submitCommand))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1)))
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Map, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(score)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(RoomImage, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(85, 85, 85))
         );
 
@@ -126,6 +150,7 @@ public class MP4JFrame extends javax.swing.JFrame {
         }
         currentRoom = you.getRoom();
         surroundings = currentRoom.getSurrounding();
+        setupRoomImages(currentRoom, you);
         //Movement Commands
         if (command.contains("NORTH")) {
             if (surroundings[0] < 0) {
@@ -136,7 +161,8 @@ public class MP4JFrame extends javax.swing.JFrame {
                 }
             } else {
                 you.setLocation(rooms[surroundings[0]]);
-                setupRoomImages(currentRoom);
+                currentRoom = you.getRoom();
+                setupRoomImages(currentRoom, you);
                 try {
                     updateInfoPanel(you.getRoom().getDescription());
                 } catch (IOException ex) {
@@ -155,7 +181,8 @@ public class MP4JFrame extends javax.swing.JFrame {
                 }
             } else {
                 you.setLocation(rooms[surroundings[1]]);
-                setupRoomImages(currentRoom);
+                currentRoom = you.getRoom();
+                setupRoomImages(currentRoom, you);
                 try {
                     updateInfoPanel(you.getRoom().getDescription());
                 } catch (IOException ex) {
@@ -174,7 +201,8 @@ public class MP4JFrame extends javax.swing.JFrame {
                 }
             } else {
                 you.setLocation(rooms[surroundings[2]]);
-                setupRoomImages(currentRoom);
+                currentRoom = you.getRoom();
+                setupRoomImages(currentRoom, you);
                 try {
                     updateInfoPanel(you.getRoom().getDescription());
                 } catch (IOException ex) {
@@ -193,7 +221,8 @@ public class MP4JFrame extends javax.swing.JFrame {
                 }
             } else {
                 you.setLocation(rooms[surroundings[3]]);
-                setupRoomImages(currentRoom);
+                currentRoom = you.getRoom();
+                setupRoomImages(currentRoom, you);
                 try {
                     updateInfoPanel(you.getRoom().getDescription());
                 } catch (IOException ex) {
@@ -207,7 +236,7 @@ public class MP4JFrame extends javax.swing.JFrame {
         if (command.contains("TAKE")) {
             if (currentRoom.getRoomObject() == null) {
                 try {
-                    updateInfoPanel(currentRoom.getRoomNum() + " does not have an item in it");
+                    updateInfoPanel("There is no item at the " + currentRoom.getRoomName());
                 } catch (IOException ex) {
                     Logger.getLogger(MP4JFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -276,7 +305,7 @@ public class MP4JFrame extends javax.swing.JFrame {
             }
             you.isBeingHelped();
         }
-        setupRoomImages(currentRoom);
+        
     }//GEN-LAST:event_submitCommandActionPerformed
 
     /**
@@ -394,7 +423,8 @@ public class MP4JFrame extends javax.swing.JFrame {
         fr.close();
     }
 
-    public void setupRoomImages(Room currentRoom) {
+    public void setupRoomImages(Room currentRoom, MainCharacter you) {
+        score.setText("" + you.getScore());
         int roomNumber = currentRoom.getRoomNum();
         ImageIcon icon;
         if (roomNumber == 4 || roomNumber == 3 || roomNumber == 6 || roomNumber == 8 || roomNumber == 18) {
@@ -434,7 +464,7 @@ public class MP4JFrame extends javax.swing.JFrame {
             RoomImage.setIcon(icon);
         }
         if (roomNumber == 0) {
-            icon = new ImageIcon("src\\Images\\Enterance.jpg");
+            icon = new ImageIcon("src\\Images\\EnteranceSign.jpg");
             RoomImage.setIcon(icon);
         }
         if (roomNumber == 1) {
@@ -522,7 +552,9 @@ public class MP4JFrame extends javax.swing.JFrame {
     private javax.swing.JLabel Map;
     private javax.swing.JTextArea OldTextInfo;
     private javax.swing.JLabel RoomImage;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel score;
     private javax.swing.JButton submitCommand;
     // End of variables declaration//GEN-END:variables
 }

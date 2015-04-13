@@ -5,6 +5,7 @@
  */
 package MP4Package;
 import MP4Package.Object;
+import MP4Package.Room;
 import java.util.ArrayList;
 /**
  *
@@ -13,29 +14,51 @@ import java.util.ArrayList;
 public class MainCharacter {
     
     
-    int Location;
-    int CarryWeight = 0;
-    int MaxCarryWeight;
+    Room Location;
     int Score;
     boolean Helping = false;
     ArrayList<Object> Inventory = new ArrayList<Object>();
     
-    
-    
-    public void setLocation(int location) {
+    public MainCharacter(Room location){
         Location = location;
     }
     
+    public void setLocation(Room location) {
+        Location = location;
+    }
+    public Room getRoom() {
+        return Location;
+    }
     public void addObject(Object object) {
         Inventory.add(object);
-        CarryWeight += object.getWeight();
     }
-    public void removeObject(Object object) {
-        Inventory.remove(object);
-        CarryWeight -= object.getWeight();
+    public int removeAllObjects() {
+        int numObjects;
+        numObjects = Inventory.size();
+        Inventory.clear();
+        return numObjects;
     }
-    public boolean isHelping() {
+    public void beingHelped() {
+        Helping = true;
+    }
+    public void notBeingHelped() {
+        Helping = false;
+    }
+    public boolean isBeingHelped() {
         return Helping;
+    }
+    public ArrayList getInventory() {
+        return Inventory;
+    }
+    public void updateScore(int score) {
+        Score += score;
+    }
+    public int getScore() {
+        return Score;
+    }
+    public String Yell() {
+        beingHelped();
+        return "I'm on my way! \nSomeone comes to help you.";
     }
     
 }

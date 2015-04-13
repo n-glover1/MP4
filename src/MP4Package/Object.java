@@ -14,24 +14,18 @@ public class Object {
     
     
     int StartingLocation;
-    int EndingLocation;
     int PointValue;
     String Name;
-    int Weight;
     
-    public Object(String name, int startingLocation, int pointValue, int weight) {
+    public Object(String name, int startingLocation, int pointValue) {
         Name = name;
         StartingLocation = startingLocation;
         PointValue = pointValue;
-        Weight = weight;
     }
     
     
     public void setStartingLocation(int location) {
         StartingLocation = location;
-    }
-    public void setEndingLocation(int location) {
-        EndingLocation = location;
     }
     public void setPointValue(int pointValue) {
         PointValue = pointValue;
@@ -42,12 +36,8 @@ public class Object {
     public void setName(String name) {
         Name = name;
     }
-    public void setWeight(int weight) {
-        Weight = weight;
+    public String getName() {
+        return Name;
     }
-    public int getWeight() {
-        return Weight;
-    }
-    
     
 }

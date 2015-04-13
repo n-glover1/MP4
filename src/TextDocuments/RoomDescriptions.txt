@@ -1,38 +1,21 @@
-(3, 4, 5, 6, 8, 18)
-Welcome to Trail 3. Trail 3 is our longest trail and is connected to many of the other trails. This means that if you are looking for a grand adventure, you are on the right trail. 
-
-(11, 12, 14)
-Trial 6 branches off of trail 3 to get up close and personal to Lake Charles West. This lake is a privately owned lake so please respect the privacy of those that own it.
-
-(10, 17)
-This trail is home to the wetlands. This is by far the best trail to walk in hopes of seeing a variety of wildlife. Be careful though, during rainy weather, this trail may be a challenge to traverse.
-
-(9, 13)
-This trail offers a roundabout look at the Potawatomi Nature Preserve, home to many species of animals and plants. This is one of the park’s shorter trials and is enjoyed by many seeking a casual stroll filled with animals and tranquility.
-
-(7, 15, 16)
-Though still in the nature, this trail functions as an access trail to many of the parks other features, including the spring shelter, the youth tent camp, and part of the Potawatomi Nature Preserve.
-
-(15)
-The Spring Shelter is a great place to stay when the weather is fair. In the heart of the woods, you can feel like a real explorer by living it rough. With the nature preserve right across Trail 2, be careful not to harm the wildlife.
-
-(0)
-Welcome to Pokagon Park, home to a variety of fun trails and activities. This is the first step to your interactive exploration of our wonderful park. You advance to the gatehouse. Normally, there is an attendant in here, however, since this is an online tour, you may forgo the 5 dollar parking fee and continue on your adventure :) Head to check out the Potawami Inn and pick up a map. 
-
-(5)
-You are at the shores of Lake Lonidaw. This peaceful lake is the favorite of many seeking calm waters and a variety of underwater wildlife.  This small kettle lake was formed over 12,000 years ago. 
-
-(1)
-The Parking Lot appears to be full. There must be plenty of people here for the excitement of the park. Good thing, this is a virtual tour! Let’s continue by heading 
-
-(20)
-Welcome to the volleyball courts. There are 2 open courts ready for an exciting game to be played. 
-
-(19)
-With direct dock access to Lake James, what does not sound fun about a boat trip at Pokagon Park? The prices are affordable whether you are looking to go canoeing, kayaking, or even sail boating.
-
-(19)
-With over 1,200 acres of water to explore and a variety of wildlife living in it, Lake James is a place to swim, boat, or just check out the animals. You are sure to have a blast on the largest body of water in Pokagon Park.
-
-(2)
+Welcome to Pokagon Park, home to a variety of fun trails and activities. This is the first step to your interactive exploration of our wonderful park. You advance to the gatehouse. Normally, there is an attendant in here, however, since this is an online tour, you may forgo the 5 dollar parking fee and continue on your adventure :) Head to check out the Potawami Inn and pick up a map. You acquire a Parking Receipt from the Gatehouse. If you bring this to the Inn you may get a special prize.
+The Parking Lot appears to be full. There must be plenty of people here for the excitement of the park. Good thing, this is a virtual tour! Letï¿½s continue by heading  You receive a welcome map of the surrounding area of the Park.
 With plenty of rooms to stay the night and a menu to cure any appetite, the Inn is the perfect place to stay the night to enjoy multiple days and nights at the park with all the amenities that you would have at your home.
+Welcome to Trail 3. Trail 3 is our longest trail and is connected to many of the other trails. This means that if you are looking for a grand adventure, you are on the right trail. 
+You continue on Trail 3. You are at a crossroads between Trail 3 and Trail 2. If you go NORTH, you continue on Trail 3. If you go WEST, you go onto Trail 2.
+You are at the Southern entrance to Trail 3. If you go EAST you will continue on Trail 3. If you go SOUTH, you will go onto Trail 6.
+You are on Trail 3, and there are multiple paths for you to take. If you head NORTH or SOUTH, you will continue on Trail 3. If you go WEST, you will be on Trail 7. If you go EAST, you will be on Trail 9. You should explore these areas.
+You are at the entrance of Trail 2. There is not much here, but you can see some buildings off in the distance.
+You are somewhere in the woods on Trail 3. If you go NORTH, or SOUTH, you will continue on Trail 3. If you go EAST, you will move onto Trail 6.
+This trail offers a roundabout look at the Potawatomi Nature Preserve, home to many species of animals and plants. This is one of the parkï¿½s shorter trials and is enjoyed by many seeking a casual stroll filled with animals and tranquility.
+This trail is home to the wetlands. This is by far the best trail to walk in hopes of seeing a variety of wildlife. Be careful though, during rainy weather, this trail may be a challenge to traverse. There is a baby bluebird laying on the ground. You pick it up to bring it to be saved by a Ranger at the Inn.
+You are on Trail 6. If you travel WEST, you can go back to Trail 3. If you head EAST you continue on Trail 6.
+You can see Trail 3 to your NORTH. The path continues EAST. You can barely make out Lake James through the trees.
+This trail offers a roundabout look at the Potawatomi Nature Preserve, home to many species of animals and plants. This is one of the parkï¿½s shorter trials and is enjoyed. You find a rusted key in the dirt. Maybe it opens a lock somewhere.
+You approach Lake Charles. This lake is a privately owned lake so please respect the privacy of those that own it. You stop and pick a Cattail. You should bring this somewhere.
+You Find yourself at the Spring Shelter. The Shelter is a great place to stay if you want the feeling of roughing it, while still enjoying the perks of being at home. A child must have left one of their Canteens out here from last spring. The Inn has a lost and found this should be placed in.
+Though still in the nature, this trail functions as an access trail to many of the parks other features, including the spring shelter and the youth tent camp.
+This trail is home to the wetlands. This is by far the best trail to walk in hopes of seeing a variety of wildlife. Be careful though, during rainy weather, this trail may be a challenge to traverse.
+You are at the northern most point on Trail 3. You find a Pine Cone on the ground. Maybe someone at the Inn knows about this.
+With direct dock access to Lake James, what does not sound fun about a boat trip at Pokagon Park? The prices are affordable whether you are looking to go canoeing, kayaking, or even sail boating. With over 1,200 acres of water to explore and a variety of wildlife living in it, Lake James is a place to swim, boat, or just check out the animals. You are sure to have a blast on the largest body of water in Pokagon Park. You see a boat. You should Yell to someone to see if they can help move it.
+Welcome to the volleyball courts. There are 2 open courts ready for an exciting game to be played. 
