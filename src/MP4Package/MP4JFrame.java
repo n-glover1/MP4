@@ -24,6 +24,7 @@ public class MP4JFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form MP4JFrame
+     * @throws java.io.IOException
      */
     public MP4JFrame() throws IOException {
         initComponents();
@@ -348,6 +349,12 @@ public class MP4JFrame extends javax.swing.JFrame {
 
     }
 
+    /**
+     * creates all the rooms
+     * @param rooms
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public void createRooms(Room[] rooms) throws FileNotFoundException, IOException {
         int temp = 0;
         String input;
@@ -410,6 +417,12 @@ public class MP4JFrame extends javax.swing.JFrame {
         br.close();
     }
 
+    /**
+     * creates all the room descriptions
+     * @param rooms
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public void createRoomDescriptions(Room[] rooms) throws FileNotFoundException, IOException {
         FileReader fr = new FileReader("src\\TextDocuments\\RoomDescriptions.txt");
         BufferedReader br = new BufferedReader(fr);
@@ -423,6 +436,11 @@ public class MP4JFrame extends javax.swing.JFrame {
         fr.close();
     }
 
+    /**
+     * changes the icon image of a jlabel to show what room the player currently is in
+     * @param currentRoom
+     * @param you
+     */
     public void setupRoomImages(Room currentRoom, MainCharacter you) {
         score.setText("" + you.getScore());
         int roomNumber = currentRoom.getRoomNum();
@@ -473,6 +491,12 @@ public class MP4JFrame extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * creates the list of objects in each room
+     * @param objects
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public void createObjects(Object[] objects) throws FileNotFoundException, IOException {
         FileReader fr = new FileReader("src\\TextDocuments\\Objects.txt");
         BufferedReader br = new BufferedReader(fr);
@@ -508,6 +532,11 @@ public class MP4JFrame extends javax.swing.JFrame {
         br.close();
     }
 
+    /**
+     * places the objects previously created into the rooms
+     * @param objects
+     * @param rooms
+     */
     public void placeObjectsInRoom(Object[] objects, Room[] rooms) {
         for (int i = 0; i < 8; i++) {
             switch (i) {
@@ -539,6 +568,12 @@ public class MP4JFrame extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * updates the text area where the player gets information from
+     * @param updater
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public void updateInfoPanel(String updater) throws FileNotFoundException, IOException {
         PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("src\\TextDocuments\\outputText.txt", true)));
         writer.println(updater);

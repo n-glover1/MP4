@@ -18,6 +18,9 @@ public class Room {
     String Description;
     Object roomObject = null;
     
+    /**
+     * Constructor
+     */
     public Room() {
         RoomNumber = -2;
         RoomName = "";
@@ -26,6 +29,16 @@ public class Room {
         RoomsSurrounding[2] = -2;
         RoomsSurrounding[3] = -2;
     }
+
+    /**
+     * Constructor
+     * @param roomNumber
+     * @param roomName
+     * @param north
+     * @param east
+     * @param south
+     * @param west
+     */
     public Room(int roomNumber, String roomName, int north, int east, int south, int west) {
         RoomNumber = roomNumber;
         RoomName = roomName;
@@ -35,34 +48,66 @@ public class Room {
         RoomsSurrounding[3] = west;
     }
     
+    /**
+     * sets the description of the room
+     * @param description description of room
+     */
     public void setDescription(String description) {
         Description = description;
     }
-    public String displayDescription() {
-        return Description;
-    }
+
+    /**
+     * gets the room number
+     * @return room number
+     */
     public int getRoomNum() {
         return RoomNumber;
     }
+
+    /**
+     * gets the room description
+     * @return room description
+     */
     public String getDescription() {
         return Description;
     }
     
+    /**
+     * Spawns an object in the room
+     * @param object object to be spawned
+     */
     public void spawnItem(Object object) {
         roomObject = object;
     }
+
+    /**
+     * gets the rooms in the 4 cardinal directions of the room
+     * @return room surroundings
+     */
     public int[] getSurrounding() {
         return RoomsSurrounding;
     }
+
+    /**
+     * gets the name of the room
+     * @return room name
+     */
     public String getRoomName() {
         return RoomName;
     }
+
+    /**
+     * gets the current object in the room
+     * @return object in room
+     */
     public Object getRoomObject() {
         return roomObject;
     }
+
+    /**
+     * removes the object of the room
+     */
     public void takeObject() {
         roomObject = null;
     }
-    
-    
 }
